@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta http-equiv="Content-Type" content="text/html;
+	charset=UTF-8" />
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container my-5">
+			<h3>Atualizar Estudante</h3>
+			<div class="card">
+				<div class="card-body">
+
+					<div class="col-md-10">
+						<form action="#" th:action="@{/estudantes/atualizar/{id}(id=${estudante.id})}" th:object="${estudante}" method="post">
+							
+								<fieldset th:replace="estudante/form :: frm-estudante"></fieldset>
+								
+							<div class="row">
+							<div class="col-md-6">
+									<input type="submit" class="btn btn-primary"
+										value="Atualizar Estudante">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

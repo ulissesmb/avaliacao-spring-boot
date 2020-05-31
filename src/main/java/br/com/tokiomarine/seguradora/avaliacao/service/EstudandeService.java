@@ -1,18 +1,7 @@
 package br.com.tokiomarine.seguradora.avaliacao.service;
 
-import java.util.List;
+import br.com.tokiomarine.seguradora.avaliacao.domain.entity.Estudante;
 
-import javax.validation.Valid;
+public interface EstudandeService extends AbstractService<Long, Estudante> {
 
-import br.com.tokiomarine.seguradora.avaliacao.entidade.Estudante;
-
-public interface EstudandeService {
-
-	List<Estudante> buscarEstudantes();
-
-	void cadastrarEstudante(@Valid Estudante estudante);
-
-	Estudante buscarEstudante(long id);
-
-	void atualizarEstudante(@Valid Estudante estudante);
 }

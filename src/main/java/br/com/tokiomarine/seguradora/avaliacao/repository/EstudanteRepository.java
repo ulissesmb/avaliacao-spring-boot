@@ -1,14 +1,11 @@
 package br.com.tokiomarine.seguradora.avaliacao.repository;
 
 import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import br.com.tokiomarine.seguradora.avaliacao.domain.entity.Estudante;
 
-import org.springframework.stereotype.Repository;
+public interface EstudanteRepository extends CrudRepository<Estudante, Long>{
 
-import br.com.tokiomarine.seguradora.avaliacao.entidade.Estudante;
-
-@Repository
-public interface EstudanteRepository {
-
-	List<Estudante> findByName(String name);
+	List<Estudante> findByNome(String nome);
 
 }
