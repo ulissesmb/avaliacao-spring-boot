@@ -77,8 +77,9 @@ public class EstudanteController {
 		Estudante resultEstudante = estudanteService.getById(id);
 		if(resultEstudante != null) {
 			estudanteService.save(estudante);
-			model.addAttribute("estudantes", estudanteService.getAll());
-			return new ModelAndView(LISTAR_REDIRECT);
+			model.addAttribute("estudantes", estudanteService.getAll())
+			.addAttribute("success", "Registro Atualizado com sucesso");
+			return new ModelAndView(LISTAR);
 		}
 		
 		model.addAttribute("warning", MSG_NOT_ID);
@@ -94,7 +95,7 @@ public class EstudanteController {
 			estudanteService.delete(estudante);
 			model
 			.addAttribute("estudantes", estudanteService.getAll())
-			.addAttribute("success", "Registro Excluido com sucesso");
+			.addAttribute("info", "Registro Excluido com sucesso");
 			return new ModelAndView(LISTAR);
 		}
 		

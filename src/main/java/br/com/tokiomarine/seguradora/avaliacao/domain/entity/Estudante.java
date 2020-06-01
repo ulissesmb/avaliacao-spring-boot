@@ -48,6 +48,14 @@ public class Estudante implements PersistentEntity, Serializable {
 		this.matricula = matricula;
 		this.curso = curso;
 	}
+	
+	public Estudante(String nome, String email, Long telefone, Integer matricula, CursoEnum curso) {
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+		this.matricula = matricula;
+		this.curso = curso;
+	}
 
 	public Long getId() {
 		return id;
