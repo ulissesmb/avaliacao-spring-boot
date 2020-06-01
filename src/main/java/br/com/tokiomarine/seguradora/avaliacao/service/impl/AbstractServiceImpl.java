@@ -1,5 +1,6 @@
 package br.com.tokiomarine.seguradora.avaliacao.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class AbstractServiceImpl<ID extends Number, E extends PersistentEntity, 
 	public List<E> getAll() throws NotFoundException {
 		List<E> entities =  (List<E>) getDao().findAll();
 		if(CollectionUtils.isEmpty(entities)){
-			throw new NotFoundException();
+			return new ArrayList<>();
 		}
 		return entities;
 	}
@@ -28,7 +29,7 @@ public class AbstractServiceImpl<ID extends Number, E extends PersistentEntity, 
 	@Override
 	public E getById(ID id) throws Exception {
 		Optional<E> entity = dao.findById(id);
-		return entity.orElseThrow(() -> new NotFoundException());
+		return entity.orElse(null);
 	}
 
 	@Override
@@ -49,5 +50,6 @@ public class AbstractServiceImpl<ID extends Number, E extends PersistentEntity, 
 	public DAO getDao() {
 		return dao;
 	}
+	
 
 }

@@ -7,5 +7,6 @@ import br.com.tokiomarine.seguradora.avaliacao.domain.entity.Estudante;
 public interface EstudanteRepository extends CrudRepository<Estudante, Long>{
 
 	List<Estudante> findByNome(String nome);
+	List<Estudante> findByMatricula(Integer matricula);
 
 }

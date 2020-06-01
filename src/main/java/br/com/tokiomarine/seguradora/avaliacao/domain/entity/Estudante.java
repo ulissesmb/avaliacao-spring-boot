@@ -28,7 +28,7 @@ public class Estudante implements PersistentEntity, Serializable {
 	
 	private String email;
 	
-	private Integer telefone;
+	private Long telefone;
 	
 	@NotNull(message = "Matrícula é obrigatória")
 	private Integer matricula;
@@ -39,7 +39,7 @@ public class Estudante implements PersistentEntity, Serializable {
 	public Estudante() {
 	}
 
-	public Estudante(Long id, String nome, String email, Integer telefone, Integer matricula, CursoEnum curso) {
+	public Estudante(Long id, String nome, String email, Long telefone, Integer matricula, CursoEnum curso) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -73,11 +73,11 @@ public class Estudante implements PersistentEntity, Serializable {
 		this.email = email;
 	}
 
-	public Integer getTelefone() {
+	public Long getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(Integer telefone) {
+	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
 	}
 

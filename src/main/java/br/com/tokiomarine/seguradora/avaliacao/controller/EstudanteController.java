@@ -1,5 +1,7 @@
 package br.com.tokiomarine.seguradora.avaliacao.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ import br.com.tokiomarine.seguradora.avaliacao.service.EstudandeService;
 public class EstudanteController {
 	
 	private static final String MSG_NOT_ID = "ID informado não existe"; 
-	private static final String PATH = "estudante";
+	private static final String PATH = "/estudante";
 	private static final String CADASTRAR = PATH + "/cadastrar";
 	private static final String ATUALIZAR = PATH + "/atualizar";
 	private static final String LISTAR = PATH + "/listar";
@@ -38,9 +40,9 @@ public class EstudanteController {
 	}
 
 	@GetMapping("listar")
-	public String listarEstudantes(Model model) throws Exception {
+	public ModelAndView listarEstudantes(Model model) throws Exception {
 		model.addAttribute("estudantes", estudanteService.getAll());
-		return "index";
+		return new ModelAndView(LISTAR_REDIRECT);
 	}
 
 	@PostMapping("add")
@@ -49,10 +51,13 @@ public class EstudanteController {
 			model.addAttribute("cursos", CursoEnum.values());
 			return new ModelAndView(CADASTRAR);
 		}
-
+		List<Estudante> matricula = estudanteService.findByMatricula(estudante.getMatricula());
+		if(!matricula.isEmpty()) {
+			return new ModelAndView(LISTAR_REDIRECT);
+		}
 		estudanteService.save(estudante);
 		model.addAttribute("success", "Registro cadastrado com sucesso");
-		return new ModelAndView(LISTAR_REDIRECT).addObject("estudantes", estudanteService.getAll());
+		return new ModelAndView(LISTAR).addObject("estudantes", estudanteService.getAll());
 	}
 
 	@GetMapping("editar/{id}")
@@ -87,8 +92,10 @@ public class EstudanteController {
 		Estudante estudante = estudanteService.getById(id);
 		if(estudante != null) {
 			estudanteService.delete(estudante);
-			model.addAttribute("estudantes", estudanteService.getAll());
-			return new ModelAndView(LISTAR_REDIRECT);
+			model
+			.addAttribute("estudantes", estudanteService.getAll())
+			.addAttribute("success", "Registro Excluido com sucesso");
+			return new ModelAndView(LISTAR);
 		}
 		
 		model.addAttribute("warning", MSG_NOT_ID);
